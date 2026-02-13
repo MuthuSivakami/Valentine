@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Valentine's Day · Love Proposal</title>
+    <!-- Bootstrap 5 (lightweight theme) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery (necessary) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Font Awesome 6 (free hearts & icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Font for romantic touch -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* -------------------------------
+           · LOVE THEME · ATTRACTIVE HEARTS 
+           · MOVABLE NO BUTTON — CAN'T CATCH! 
+           ------------------------------- */
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(145deg, #ffdde1 0%, #fbc2c2 100%);
+            font-family: 'Quicksand', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* floating heart background animation (css only) */
+        .heart-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .heart-bg i {
+            position: absolute;
+            color: rgba(255, 80, 120, 0.2);
+            font-size: 24px;
+            animation: floatUp 10s linear infinite;
+            bottom: -50px;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 0.6; }
+            100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+        }
+
+        /* main card – bootstrap enhanced */
+        .proposal-card {
+            background: rgba(255, 245, 245, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 50px 20px 50px 20px;
+            box-shadow: 0 30px 50px rgba(220, 20, 60, 0.25);
+            border: 2px solid rgba(255, 200, 210, 0.7);
+            max-width: 750px;
+            width: 90%;
+            padding: 2.5rem 1.8rem;
+            margin: 30px auto;
+            position: relative;
+            z-index: 20;
+            transition: 0.4s;
+        }
+
+        /* heart divider & decorations */
+        .heart-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 15px 0;
+            color: #e63956;
+            font-size: 1.8rem;
+        }
+        .heart-divider i {
+            text-shadow: 0 0 8px #ff8c9c;
+            animation: pulse 1.8s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.2); opacity: 1; text-shadow: 0 0 18px #ff4d6d; }
+            100% { transform: scale(1); opacity: 0.9; }
+        }
+
+        /* big romantic title */
+        .valentine-title {
+            font-family: 'Dancing Script', cursive;
+            color: #a12b4a;
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-shadow: 3px 3px 0 #ffe0e5;
+            letter-spacing: 2px;
+            margin-bottom: 0.2em;
+        }
+
+        .proposal-text {
+            font-size: 1.6rem;
+            color: #441e2a;
+            font-weight: 600;
+            line-height: 1.3;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 80px 20px 80px 20px;
+            padding: 0.6rem 1.2rem;
+            display: inline-block;
+            backdrop-filter: blur(4px);
+            margin: 15px 0;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            color: #5e363f;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 1.5rem;
+            border-radius: 30px 10px 30px 10px;
+            border-left: 8px solid #ff4d6a;
+            font-weight: 500;
+            box-shadow: inset 0 0 20px rgba(255, 220, 240, 0.5);
+            margin: 25px 0;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        /* super attractive heart buttons and interactive */
+        .btn-heart {
+            background: #ff4d6a;
+            border: none;
+            border-radius: 60px 20px 60px 20px;
+            padding: 14px 32px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 1px 1px 2px #77001c;
+            box-shadow: 0 10px 0 #a12e45, 0 6px 25px rgba(255, 30, 86, 0.5);
+            transition: all 0.06s linear;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            border: 2px solid #ffe6eb;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-heart i {
+            font-size: 1.9rem;
+            filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.2));
+            animation: heartbeat 1.2s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.3); color: #ffe6f0; }
+            60% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .btn-heart:hover {
+            background: #ff3355;
+            box-shadow: 0 7px 0 #7e2639, 0 8px 30px #ff5c7a;
+            transform: translateY(3px);
+        }
+
+        .btn-heart:active {
+            transform: translateY(10px);
+            box-shadow: 0 2px 0 #7e2639, 0 8px 30px #ff5c7a;
+        }
+
+        /* ---------- MOVABLE NO BUTTON - EVASIVE ---------- */
+        .btn-outline-heart {
+            background: rgba(255, 255, 255, 0.7);
+            border: 3px solid #ff4d6d;
+            color: #b83b4a;
+            font-weight: 700;
+            border-radius: 50px 20px 50px 20px;
+            padding: 12px 28px;
+            font-size: 1.3rem;
+            backdrop-filter: blur(5px);
+            transition: 0.08s ease-out;  /* smooth movement */
+            position: relative;  /* for left/right movement */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn-outline-heart i {
+            color: #ff1a4c;
+        }
+
+        /* Hover effect is now movement, so we remove background change? 
+           We'll keep a little style but movement overrides via JS */
+        .btn-outline-heart:hover {
+            /* no color change, movement handled by jquery */
+            background: rgba(255, 230, 235, 0.9);
+            border-color: #ff3b5c;
+        }
+
+        .floating-hearts-container {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        /* jquery generated hearts will have this class */
+        .floating-heart {
+            position: absolute;
+            color: #ff5e7c;
+            font-size: 30px;
+            opacity: 0.9;
+            animation: flyUp 3.5s ease-out forwards;
+            text-shadow: 0 0 8px #ffb7c5;
+            z-index: 50;
+        }
+
+        @keyframes flyUp {
+            0% { transform: translateY(0) scale(0.7); opacity: 1; }
+            100% { transform: translateY(-180px) scale(1.6); opacity: 0; }
+        }
+
+        .response-message {
+            margin-top: 30px;
+            padding: 15px;
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #b32e4a;
+            background: #fff0f3e0;
+            border-radius: 50px 10px 50px 10px;
+            border: 2px dashed #ff819a;
+            font-family: 'Dancing Script', cursive;
+            display: none;
+        }
+
+        .response-message.show {
+            display: block;
+        }
+
+        .love-meter {
+            margin: 20px 0 10px;
+            color: #922c40;
+            font-weight: 600;
+        }
+
+        .small-heart-icons {
+            color: #ff3b5c;
+            letter-spacing: 8px;
+            font-size: 1.7rem;
+        }
+
+        /* responsive tweaks */
+        @media (max-width: 576px) {
+            .valentine-title { font-size: 2.5rem; }
+            .proposal-text { font-size: 1.3rem; }
+            .btn-heart { font-size: 1.2rem; padding: 12px 20px; }
+            .btn-outline-heart { font-size: 1.1rem; padding: 10px 18px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- background floating hearts (pure CSS decorative) -->
+    <div class="heart-bg">
+        <i class="fas fa-heart" style="left: 5%; animation-delay: 0s;"></i>
+        <i class="fas fa-heart" style="left: 15%; animation-delay: 3s; font-size: 40px;"></i>
+        <i class="fas fa-heart" style="left: 30%; animation-delay: 1.5s; font-size: 28px;"></i>
+        <i class="fas fa-heart" style="left: 50%; animation-delay: 6s; font-size: 36px;"></i>
+        <i class="fas fa-heart" style="left: 70%; animation-delay: 2.2s; font-size: 20px;"></i>
+        <i class="fas fa-heart" style="left: 85%; animation-delay: 4.5s; font-size: 45px;"></i>
+        <i class="fas fa-heart" style="left: 92%; animation-delay: 1s; font-size: 32px;"></i>
+        <i class="fas fa-heart" style="left: 40%; animation-delay: 7s;"></i>
+        <i class="fas fa-heart" style="left: 75%; animation-delay: 8s; font-size: 25px;"></i>
+    </div>
+
+    <!-- main proposal card · Bootstrap grid + love -->
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="proposal-card text-center">
+            <!-- heart row decoration -->
+            <div class="heart-divider">
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart-beat" style="color: #db2c4f;"></i>
+                <i class="fas fa-heart"></i>
+            </div>
+
+            <!-- Valentine big heading -->
+            <h1 class="valentine-title">Be my Valentine?</h1>
+            
+            <!-- floating hearts will appear here (jquery) -->
+            <div id="heartShower" class="floating-hearts-container" style="min-height: 60px;"></div>
+
+            <!-- sweet proposal message -->
+            <div class="proposal-text">
+                <i class="fas fa-heart" style="color: #ff2850;"></i> My Dearest Love <i class="fas fa-heart" style="color: #ff2850;"></i>
+            </div>
+            
+            <!-- romantic message with bootstrap row -->
+            <div class="message">
+                <i class="fas fa-quote-left" style="color: #ff758f;"></i> 
+                From the moment we met, my heart found its home. Every beat whispers your name. 
+                In a universe full of stars, you are my warmest glow. 
+                Will you make me the happiest person and say YES? 
+                <i class="fas fa-quote-right" style="color: #ff758f;"></i>
+            </div>
+
+            <!-- BOOTSTRAP BUTTONS + jQuery · NO BUTTON MOVES! -->
+            <div class="row g-3 justify-content-center mb-3 align-items-center">
+                <div class="col-md-6 col-12 d-flex justify-content-center">
+                    <button id="yesBtn" class="btn-heart">
+                        <i class="fas fa-heart"></i> YES! 💖 
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="col-md-6 col-12 d-flex justify-content-center position-relative">
+                    <!-- the movable NO button wrapper for relative positioning -->
+                    <div id="noBtnWrapper" style="display: inline-block; transition: none;">
+                        <button id="noBtn" class="btn-outline-heart">
+                            <i class="fas fa-heart-broken"></i> No
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- additional bootstrap row for more love -->
+            <div class="row mt-3">
+                <div class="col-12 love-meter">
+                    <span class="small-heart-icons">
+                        <i class="fas fa-heart"></i> 
+                        <i class="fas fa-heart"></i> 
+                        <i class="fas fa-heart"></i> 
+                        <i class="fas fa-heart"></i> 
+                        <i class="fas fa-heart"></i> 
+                    </span>
+                    <p style="margin-top: 8px; font-size: 1.1rem;">You have all my heart ❤️</p>
+                </div>
+            </div>
+
+            <!-- response message after clicking YES (hidden initially) -->
+            <div id="responseBox" class="response-message">
+                <i class="fas fa-heart" style="font-size: 2.5rem; color: #ff1e4f;"></i><br>
+                Yay! Valentine’s Day with you = forever happiness! <br>
+                <span style="font-size: 2rem;">&#10084;&#65039; I LOVE YOU! &#10084;&#65039;</span>
+                <div class="mt-2">
+                    <i class="fas fa-heart" style="color: #ff99aa;"></i>
+                    <i class="fas fa-heart" style="color: #ff3355;"></i>
+                    <i class="fas fa-heart" style="color: #ff6670;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+
+            // ========== ATTRACTIVE HEART DESIGNS & PROPOSAL MAGIC ==========
+            // Function to create floating hearts dynamically (jquery)
+            function createFloatingHeart() {
+                const heartContainer = $('#heartShower');
+                const heartIcons = ['fa-heart', 'fa-heart', 'fa-heart', 'fa-heart', 'fa-heart-pulse', 'fa-heart-circle-check', 'fa-heart-circle-plus'];
+                const randomHeart = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                const heartElement = $('<i class="fas ' + randomHeart + ' floating-heart"></i>');
+                
+                const posX = Math.random() * 90;
+                heartElement.css({
+                    left: posX + '%',
+                    bottom: '0px',
+                    color: Math.random() > 0.5 ? '#ff3b5c' : '#e84362',
+                    fontSize: (Math.floor(Math.random() * 35) + 25) + 'px',
+                    animation: 'flyUp ' + (Math.random() * 2 + 2.2) + 's ease-out forwards',
+                    opacity: 0.9,
+                    textShadow: '0 0 12px #ffb6c1'
+                });
+                heartContainer.append(heartElement);
+                setTimeout(() => {
+                    heartElement.remove();
+                }, 4000);
+            }
+
+            let heartInterval;
+            function startHeartShower() {
+                heartInterval = setInterval(function() {
+                    createFloatingHeart();
+                }, 320);
+            }
+            startHeartShower();
+
+            // ----------------------------------------------
+            // 🏃‍♂️ MOVABLE NO BUTTON – EVADE CURSOR!
+            // ----------------------------------------------
+            const $noBtn = $('#noBtn');
+            const $wrapper = $('#noBtnWrapper');
+            let moveCount = 0;
+            let activeMovements = 0; // to throttle
+
+            function moveNoButton() {
+                // get wrapper and card boundaries
+                const wrapperOffset = $wrapper.offset();
+                const wrapperWidth = $wrapper.outerWidth();
+                const wrapperHeight = $wrapper.outerHeight();
+                
+                // get parent container (col) to stay inside
+                const $parentCol = $wrapper.closest('.col-md-6');
+                const parentOffset = $parentCol.offset();
+                const parentWidth = $parentCol.width();
+                const parentHeight = $parentCol.height();
+
+                // random offset within col, but keep button fully visible
+                const maxX = parentWidth - wrapperWidth - 10;  // 10px margin
+                const maxY = parentHeight - wrapperHeight - 10;
+                
+                // generate random position, but ensure it's not too far (stay inside)
+                let newX = Math.max(5, Math.min(maxX, Math.random() * maxX));
+                let newY = Math.max(5, Math.min(maxY, Math.random() * maxY));
+                
+                // sometimes move to left/right more dramatically when cursor near
+                // we add extra "dodge" based on cursor? but for simplicity, random.
+                $wrapper.css({
+                    'position': 'relative',
+                    'left': newX + 'px',
+                    'top': newY + 'px',
+                    'transition': 'left 0.18s ease-out, top 0.18s ease-out'
+                });
+            }
+
+            // EVASION ON MOUSEMOVE: if cursor gets close, flee!
+            $(document).on('mousemove', function(e) {
+                // only if No button is not disabled (still movable)
+                if ($noBtn.prop('disabled')) return;
+                
+                const noBtnOffset = $noBtn.offset();
+                if (!noBtnOffset) return;
+                
+                const noBtnWidth = $noBtn.outerWidth();
+                const noBtnHeight = $noBtn.outerHeight();
+                
+                // calculate cursor distance to button center
+                const btnCenterX = noBtnOffset.left + noBtnWidth/2;
+                const btnCenterY = noBtnOffset.top + noBtnHeight/2;
+                
+                const distance = Math.hypot(e.clientX - btnCenterX, e.clientY - btnCenterY);
+                
+                // if cursor very close (≤ 150px) → move away! also threshold
+                if (distance < 160) {
+                    // throttle a bit: not every pixel, but run
+                    moveCount++;
+                    if (moveCount % 3 === 0) { // move every 3rd event to be smooth but not jittery
+                        moveNoButton();
+                    }
+                }
+            });
+
+            // also move when mouse enters button area (immediate dodge)
+            $noBtn.on('mouseenter', function(e) {
+                if ($noBtn.prop('disabled')) return;
+                // immediate dodge!
+                for (let i=0; i<3; i++) { // multiple jumps? just move twice
+                    setTimeout(() => { moveNoButton(); }, i * 40);
+                }
+                // change appearance slightly to show evasion
+                $(this).css('border-color', '#ff0066');
+            }).on('mouseleave', function() {
+                if ($noBtn.prop('disabled')) return;
+                $(this).css('border-color', '#ff4d6d'); // restore
+            });
+
+            // ------------------  PREVENT CLICK on NO BUTTON! ------------------
+            // No matter what, clicking No will not work (it's movable and also we preventDefault)
+            $('#noBtn').on('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                // also move violently when clicked
+                for (let i=0; i<5; i++) {
+                    setTimeout(() => { moveNoButton(); }, i * 30);
+                }
+                // optional: playful message in console? or small heart burst
+                createFloatingHeart();
+                createFloatingHeart();
+                return false;
+            });
+
+            // YES button click: huge heart explosion, show response, proposal accepted
+            $('#yesBtn').on('click', function(e){
+                e.preventDefault();
+                // disable No button so it stops moving? but we keep it alive but disabled
+                $('#noBtn').prop('disabled', true);
+                // also reset its position? not necessary, but make it stop dodging
+                $(document).off('mousemove'); // remove evasive mousemove (we will rebind? we just disable but careful: we'll unbind specifically)
+                // rebind? for simplicity we disable noBtn and stop mousemove listener by namespace
+                $(document).off('mousemove.evasive');
+                // also we can rebind later? no need after YES
+                
+                // create 25 explosive hearts as a special valentine effect
+                for (let i = 0; i < 25; i++) {
+                    setTimeout(function() {
+                        createFloatingHeart();
+                    }, i * 30);
+                }
+                // show super romantic response
+                $('#responseBox').addClass('show');
+                $('.valentine-title').html('My Valentine! 💘');
+                $('.valentine-title').css('color', '#b01e4c');
+                
+                // transform No button to "ONLY YES" and disable
+                $('#noBtn').html('<i class="fas fa-heart"></i> ONLY YES <i class="fas fa-heart"></i>').css({
+                    'background': '#ffe0e5', 
+                    'color': '#b32e4a', 
+                    'border': '2px solid #ff4d6a',
+                    'pointer-events': 'none', // make it non-clickable
+                    'opacity': '0.9'
+                });
+                $('#noBtn').prop('disabled', true);
+                // remove any transition left from wrapper
+                $wrapper.css({ left: '0px', top: '0px' }); // reset position
+            });
+
+            // extra love: double click on title adds a special heart animation
+            $('.valentine-title').on('dblclick', function(){
+                for (let i=0;i<12;i++) {
+                    createFloatingHeart();
+                }
+                alert("💗 I adore you! 💗");
+            });
+
+            // stop background heart interval when page hidden
+            $(window).on('beforeunload', function(){
+                clearInterval(heartInterval);
+            });
+            
+            // namespace mousemove for evasive action (so we can off)
+            $(document).on('mousemove.evasive', function(e) {
+                if ($('#noBtn').prop('disabled')) return;
+                
+                const noBtnOffset = $('#noBtn').offset();
+                if (!noBtnOffset) return;
+                
+                const noBtnWidth = $('#noBtn').outerWidth();
+                const noBtnHeight = $('#noBtn').outerHeight();
+                
+                const btnCenterX = noBtnOffset.left + noBtnWidth/2;
+                const btnCenterY = noBtnOffset.top + noBtnHeight/2;
+                
+                const distance = Math.hypot(e.clientX - btnCenterX, e.clientY - btnCenterY);
+                
+                if (distance < 180) {
+                    // throttle
+                    if (window.evadeCounter === undefined) window.evadeCounter = 0;
+                    window.evadeCounter++;
+                    if (window.evadeCounter % 3 === 0) {
+                        moveNoButton();
+                    }
+                }
+            });
+            
+            // initialize move function once to place no button somewhere nice
+            setTimeout(() => {
+                if (!$('#noBtn').prop('disabled')) {
+                    // initial random position (but not too far)
+                    moveNoButton();
+                }
+            }, 100);
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
